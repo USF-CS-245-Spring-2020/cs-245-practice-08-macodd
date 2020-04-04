@@ -14,7 +14,7 @@
  * @param <T> arr: Template for data structure
  */
 
-public class BST<T> {
+public class BST<T extends Comparable<T>> {
 
     private BSTNode<T> root;  // first node of tree
 
@@ -25,7 +25,7 @@ public class BST<T> {
      * @param item: item to be searched for in tree.
      * @return bool: true if item is found.
      */
-    public boolean find(Comparable<T> item){
+    public boolean find(T item){
         return find(this.root, item);  // calls private find function
     }
 
@@ -37,7 +37,7 @@ public class BST<T> {
      * @param item: item to be searched for.
      * @return bool: true if found.
      */
-    private boolean find(BSTNode<T> node, Comparable<T> item){
+    private boolean find(BSTNode<T> node, T item){
         if (node == null)
             return false;  // item not found
         if (item.compareTo(node.data) == 0)
@@ -54,7 +54,7 @@ public class BST<T> {
      * Inserts an item into its correct position in the tree.
      * @param item: item to be inserted.
      */
-    public void insert(Comparable<T> item){
+    public void insert(T item){
         this.root = insert(this.root, item);  // starts with inserting root
     }
 
@@ -66,9 +66,9 @@ public class BST<T> {
      * @param item: item to be inserted
      * @return BSTNode: node inserted into tree
      */
-    private BSTNode<T> insert(BSTNode<T> node, Comparable<T> item){
+    private BSTNode<T> insert(BSTNode<T> node, T item){
         if (node == null)
-            return new BSTNode<T>((T) item);  // empty
+            return new BSTNode<T>(item);  // empty
         if (item.compareTo(node.data) < 0)
             node.left = insert(node.left, item);  // item less than current node data
         else
@@ -104,7 +104,7 @@ public class BST<T> {
      * Deletes node and rearranges tree if necessary
      * @param item: item to be deleted
      */
-    public void delete(Comparable<T> item){
+    public void delete(T item){
         this.root = delete(this.root, item);  // starts with root node
     }
 
@@ -116,7 +116,7 @@ public class BST<T> {
      * @param item: item to be deleted
      * @return BSTNode: deleted node
      */
-    public BSTNode<T> delete(BSTNode<T> node, Comparable<T> item){
+    public BSTNode<T> delete(BSTNode<T> node, T item){
         if (node == null)
             return null;  // not found
         if (item.compareTo(node.data) < 0) {
